@@ -1,0 +1,18 @@
+const jwt = require('jsonwebtoken');
+const SECRET = 'clave_secreta_super_segura';
+
+function authMiddleware(req, res, next) {
+  const header = req.headers['authorization'];
+  if (!header) return res.status(401).json({ error: 'Token requerido' });
+
+  const token = header.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, SECRET);
+    req.user = decoded; // adjunta info del usuario al request
+    next();
+  } catch (err) {
+    res.status(403).json({ error: 'Token inválido o expirado' });
+  }
+}
+
+module.exports = authMiddleware;
