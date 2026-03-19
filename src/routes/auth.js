@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const pool = require('../db');
 
 const router = express.Router();
-const SECRET = 'clave_secreta_super_segura';
+const SECRET = process.env.JWT_SECRET;
 
 // Registro
 router.post('/register', async (req, res) => {
