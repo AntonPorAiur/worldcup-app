@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoutes = require('./routes/auth');
 const predictionRoutes = require('./routes/predictions');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 app.use(express.json());
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 // Rutas
 app.use('/auth', authRoutes);
 app.use('/predictions', predictionRoutes);
+app.use('/admin', adminRoutes);
 
 app.listen(3000, () => {
   console.log('Servidor corriendo en http://localhost:3000');
