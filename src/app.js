@@ -17,6 +17,15 @@ const swaggerOptions = {
       title: 'API Mundial App',
       version: '1.0.0',
       description: 'Documentación de endpoints para predicciones de partidos'
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
+      }
     }
   },
   apis: ['./src/routes/*.js', './src/app.js'], // rutas donde pondrás comentarios JSDoc

@@ -18,6 +18,42 @@ router.get('/', authMiddleware, async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * /scores:
+ *   post:
+ *     summary: Cargar una predicción de un partido
+ *     description: Permite a un usuario cargar la predicción de un partido, incluyendo ronda, scores y cálculo automático de empate/ganador.
+ *     tags:
+ *       - Predicciones
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               matchId:
+ *                 type: integer
+ *                 example: 1
+ *               userId:
+ *                 type: integer
+ *                 example: 1
+ *               ronda:
+ *                 type: integer
+ *                 example: 1
+ *               scoreLocal:
+ *                 type: integer
+ *                 example: 2
+ *               scoreVisitante:
+ *                 type: integer
+ *                 example: 1
+ *     responses:
+ *       201:
+ *         description: Predicción creada exitosamente
+ */
 // Endpoint protegido
 router.post('/scores', authMiddleware, async (req, res) => {
   try {
