@@ -47,6 +47,7 @@ app.use('/prediction', predictionRoutes);
 app.use('/admin', adminRoutes);
 app.use('/match', partidosRoutes);
 
+console.log('SECRET:', process.env.SECRET);
 // probar conexión
 sequelize.authenticate()
   .then(() => console.log('✅ Conexión establecida'))
