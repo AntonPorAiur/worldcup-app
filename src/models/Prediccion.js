@@ -1,25 +1,37 @@
-// models/Prediccion.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db'); // instancia de conexión
+const sequelize = require('../db'); // instancia de Sequelize
 
 const Prediccion = sequelize.define('Prediccion', {
-  matchId: {
+  id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    autoIncrement: true,
+    primaryKey: true
   },
-  userId: {
+  match_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    references: {
+      model: 'partidos',
+      key: 'matchId'
+    }
+  },
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'usuarios',
+      key: 'id'
+    }
   },
   ronda: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  scoreLocal: {
+  pred_local: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  scoreVisitante: {
+  pred_visitante: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
@@ -27,12 +39,17 @@ const Prediccion = sequelize.define('Prediccion', {
     type: DataTypes.BOOLEAN,
     allowNull: false
   },
-  ganador: {
-    type: DataTypes.STRING,
+  pred_ganador: {
+    type: DataTypes.STRING(20),
     allowNull: true
+  },
+  calculado_en: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
   }
 }, {
-  tableName: 'predictions'
+  tableName: 'predicciones',
+  timestamps: false // desactivamos createdAt/updatedAt automáticos
 });
 
 module.exports = Prediccion;
