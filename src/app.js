@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require('express');
+const sequelize = require('./db');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const authRoutes = require('./routes/auth');
@@ -44,6 +46,11 @@ app.use('/auth', authRoutes);
 app.use('/prediction', predictionRoutes);
 app.use('/admin', adminRoutes);
 app.use('/match', partidosRoutes);
+
+// probar conexión
+sequelize.authenticate()
+  .then(() => console.log('✅ Conexión establecida'))
+  .catch(err => console.error('❌ Error de conexión:', err));
 
 app.listen(3000, () => {
   console.log('Servidor corriendo en http://localhost:3000');

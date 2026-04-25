@@ -8,12 +8,14 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: 'mysql',
-    port: process.env.DB_PORT || 3306
+    port: process.env.DB_PORT || 3306,
+    pool: {
+      max: 10,
+      min: 1,
+      acquire: 30000,
+      idle: 10000
+    }
   }
 );
-
-sequelize.authenticate()
-  .then(() => console.log('✅ Conexión Sequelize establecida'))
-  .catch(err => console.error('❌ Error de conexión:', err));
 
 module.exports = sequelize;
